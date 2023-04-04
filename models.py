@@ -23,7 +23,7 @@ class Ingredient(db.Model):
   __tablename__ = 'ingredients'
 
   id = Column(Integer, primary_key=True)
-  name = Column(String, nullable=False)
+  name = Column(String, nullable=False,unique=True)
   recipes = relationship('Recipe',
                          secondary=recipe_ingredient_table,
                          back_populates='ingredients')
@@ -33,7 +33,7 @@ class Recipe(db.Model):
     __tablename__ = 'recipes'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    name = Column(String, nullable=False, unique = True)
     time_taken = Column(Integer)
     images = relationship('Image', backref='recipe', lazy=True)
     ingredients = relationship('Ingredient',
